@@ -44,6 +44,7 @@
           - connect_network
         environment:
           ZOOKEEPER_CONNECT: zookeeper:2181
+          ADVERTISED_HOST_NAME: kafka
           KAFKA_ADVERTISED_HOSTNAME: 127.0.0.1
 
       connect:
@@ -65,6 +66,11 @@
           CONFIG_STORAGE_TOPIC: my-connect-configs
           OFFSET_STORAGE_TOPIC: my-connect-offsets
           BOOTSTRAP_SERVERS: kafka:9092
+        healthcheck:
+          test: "curl -f connect:8083/connectors/"
+          interval: 20s
+          timeout: 120s
+          retries: 6
 
     networks:
       connect_network:
