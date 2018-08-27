@@ -16,8 +16,7 @@ curl -X POST -H "Accept:application/json" -H "Content-Type:application/json" con
         "transforms.route.replacement": "$3",
         "name": "inventory-connector"
     }
-}'
-curl -X POST -H "Accept:application/json" -H "Content-Type:application/json" connect:8083/connectors/ -d '
+}' && curl -X POST -H "Accept:application/json" -H "Content-Type:application/json" connect:8083/connectors/ -d '
 {
     "name": "elastic-sink",
     "config": {
