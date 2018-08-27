@@ -66,8 +66,10 @@
           CONFIG_STORAGE_TOPIC: my-connect-configs
           OFFSET_STORAGE_TOPIC: my-connect-offsets
           BOOTSTRAP_SERVERS: kafka:9092
+        volumes:
+            - "./connect/scripts:/scripts"
         healthcheck:
-          test: "curl -f connect:8083/connectors/"
+          test: "curl -f connect:8083/connectors/ && sh /scripts/init.sh"
           interval: 20s
           timeout: 120s
           retries: 6
