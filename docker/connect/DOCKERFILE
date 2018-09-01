@@ -21,3 +21,11 @@ ENV DOCKERIZE_VERSION v0.6.1
 RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
     && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
     && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+
+
+ENV KEY_CONVERTER=io.confluent.connect.avro.AvroConverter
+ENV VALUE_CONVERTER=io.confluent.connect.avro.AvroConverter
+ENV CONNECT_KEY_CONVERTER_SCHEMA_REGISTRY_URL=http://schema_registry:8081
+ENV CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL=http://schema_registry:8081
+ENV INTERNAL_KEY_CONVERTER=io.confluent.connect.avro.AvroConverter
+ENV INTERNAL_VALUE_CONVERTER=io.confluent.connect.avro.AvroConverter
