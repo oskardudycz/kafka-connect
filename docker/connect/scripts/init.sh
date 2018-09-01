@@ -1,6 +1,9 @@
+
+apk add --update curl && rm -rf /var/cache/apk/*
+
 curl -X POST -H "Accept:application/json" -H "Content-Type:application/json" connect:8083/connectors/ -d '
 {
-    "name": "postgres-connector",
+    "name": "postgres-source-connector",
     "config": {
         "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
         "tasks.max": "1",
@@ -8,17 +11,18 @@ curl -X POST -H "Accept:application/json" -H "Content-Type:application/json" con
         "database.port": "5432",
         "database.user": "postgres",
         "database.password": "postgres",
-        "database.dbname": "test",
+        "database.dbname": "postgres",
         "database.server.name": "dbserver1",
+        "table.whitelist": "public.test_table,mt_doc_account,mt_doc_allaccountsummaryview,mt_doc_accountsummaryview,EventSourcingSample.mt_doc_clientview",
         "transforms": "route",
         "transforms.route.type": "org.apache.kafka.connect.transforms.RegexRouter",
         "transforms.route.regex": "([^.]+)\\.([^.]+)\\.([^.]+)",
         "transforms.route.replacement": "$3",
-        "name": "postgres-connector"
+        "name": "postgres-source-connector"
     }
 }' && curl -X POST -H "Accept:application/json" -H "Content-Type:application/json" connect:8083/connectors/ -d '
 {
-    "name": "elastic-sink",
+    "name": "elastic-connector-sink",
     "config": {
         "connector.class": "io.confluent.connect.elasticsearch.ElasticsearchSinkConnector",
         "tasks.max": "1",
@@ -30,5 +34,20 @@ curl -X POST -H "Accept:application/json" -H "Content-Type:application/json" con
         "transforms.key.field": "id",
         "key.ignore": "false",
         "type.name": "test_table"
+    }
+}' && curl -X POST -H "Accept:application/json" -H "Content-Type:application/json" connect:8083/connectors/ -d '
+{
+    "name": "elastic-connector-clients-sink",
+    "config": {
+        "connector.class": "io.confluent.connect.elasticsearch.ElasticsearchSinkConnector",
+        "tasks.max": "1",
+        "topics": "mt_doc_clientview",
+        "connection.url": "http://elastic:9200",
+        "transforms": "unwrap,key",
+        "transforms.unwrap.type": "io.debezium.transforms.UnwrapFromEnvelope",
+        "transforms.key.type": "org.apache.kafka.connect.transforms.ExtractField$Key",
+        "transforms.key.field": "id",
+        "key.ignore": "false",
+        "type.name": "client"
     }
 }'

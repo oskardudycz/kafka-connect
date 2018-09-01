@@ -13,8 +13,8 @@
         ports: ["5432:5432"]
         networks:
           - connect_network
-        environment:
-          POSTGRES_DB: test
+        # environment:
+        #   POSTGRES_DB: postgres
         volumes:
           - ./postgres/init.sql:/docker-entrypoint-initdb.d/1-schema.sql
         healthcheck:
@@ -93,11 +93,26 @@
         volumes:
             - "./connect/scripts:/scripts"
         healthcheck:
-          test: "curl -f connect:8083/connectors/ && sh /scripts/init.sh"
+          test: "curl -f connect:8083/connectors/"
           interval: 20s
           timeout: 120s
           retries: 6
-      
+
+      #######################################################
+      #  Setup Kafka Connectors
+      #######################################################
+      connectors-setup:
+        image: jwilder/dockerize
+        container_name: connectors-setup
+        volumes:
+            - "./connect/scripts:/scripts"
+        # setup script needs to run after Kafka Conect is working
+        command: dockerize -wait http://connect:8083/connectors/ -timeout 2m sh /scripts/init.sh
+        depends_on:
+          - connect
+        networks:
+          - connect_network
+        
       #######################################################
       #  .NET Core WebApi with Marten
       #######################################################

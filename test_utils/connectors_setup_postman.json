@@ -21,7 +21,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n \"name\": \"postgres-connector\",\r\n \"config\": {\r\n \"connector.class\": \"io.debezium.connector.postgresql.PostgresConnector\",\r\n \"tasks.max\": \"1\",\r\n \"database.hostname\": \"postgres\",\r\n \"database.port\": \"5432\",\r\n \"database.user\": \"postgres\",\r\n \"database.password\": \"postgres\",\r\n \"database.dbname\" : \"test\",\r\n \"database.server.name\": \"dbserver1\",\r\n \"transforms\": \"route\",\r\n \"transforms.route.type\": \"org.apache.kafka.connect.transforms.RegexRouter\",\r\n \"transforms.route.regex\": \"([^.]+)\\\\.([^.]+)\\\\.([^.]+)\",\r\n \"transforms.route.replacement\": \"$3\"\r\n }\r\n}"
+					"raw": "{\r\n \"name\": \"test-postgres-connector\",\r\n \"config\": {\r\n \"connector.class\": \"io.debezium.connector.postgresql.PostgresConnector\",\r\n \"tasks.max\": \"1\",\r\n \"database.hostname\": \"postgres\",\r\n \"database.port\": \"5432\",\r\n \"database.user\": \"postgres\",\r\n \"database.password\": \"postgres\",\r\n \"database.dbname\" : \"test\",\r\n \"database.server.name\": \"dbserver1\",\r\n \"transforms\": \"route\",\r\n \"transforms.route.type\": \"org.apache.kafka.connect.transforms.RegexRouter\",\r\n \"transforms.route.regex\": \"([^.]+)\\\\.([^.]+)\\\\.([^.]+)\",\r\n \"transforms.route.replacement\": \"$3\"\r\n }\r\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8083/connectors/",
@@ -67,7 +67,7 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://localhost:8083/connectors/postgres-connector",
+					"raw": "http://localhost:8083/connectors/test-postgres-connector",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -75,7 +75,7 @@
 					"port": "8083",
 					"path": [
 						"connectors",
-						"postgres-connector"
+						"test-postgres-connector"
 					]
 				}
 			},
@@ -88,7 +88,7 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://localhost:8083/connectors/postgres-connector",
+					"raw": "http://localhost:8083/connectors/test-postgres-connector",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -96,7 +96,7 @@
 					"port": "8083",
 					"path": [
 						"connectors",
-						"postgres-connector"
+						"test-postgres-connector"
 					]
 				}
 			},
