@@ -21,7 +21,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n \"name\": \"inventory-connector\",\r\n \"config\": {\r\n \"connector.class\": \"io.debezium.connector.postgresql.PostgresConnector\",\r\n \"tasks.max\": \"1\",\r\n \"database.hostname\": \"postgres\",\r\n \"database.port\": \"5432\",\r\n \"database.user\": \"postgres\",\r\n \"database.password\": \"postgres\",\r\n \"database.dbname\" : \"inventory\",\r\n \"database.server.name\": \"dbserver1\",\r\n \"transforms\": \"route\",\r\n \"transforms.route.type\": \"org.apache.kafka.connect.transforms.RegexRouter\",\r\n \"transforms.route.regex\": \"([^.]+)\\\\.([^.]+)\\\\.([^.]+)\",\r\n \"transforms.route.replacement\": \"$3\"\r\n }\r\n}"
+					"raw": "{\r\n \"name\": \"postgres-connector\",\r\n \"config\": {\r\n \"connector.class\": \"io.debezium.connector.postgresql.PostgresConnector\",\r\n \"tasks.max\": \"1\",\r\n \"database.hostname\": \"postgres\",\r\n \"database.port\": \"5432\",\r\n \"database.user\": \"postgres\",\r\n \"database.password\": \"postgres\",\r\n \"database.dbname\" : \"test\",\r\n \"database.server.name\": \"dbserver1\",\r\n \"transforms\": \"route\",\r\n \"transforms.route.type\": \"org.apache.kafka.connect.transforms.RegexRouter\",\r\n \"transforms.route.regex\": \"([^.]+)\\\\.([^.]+)\\\\.([^.]+)\",\r\n \"transforms.route.replacement\": \"$3\"\r\n }\r\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8083/connectors/",
@@ -67,7 +67,7 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://localhost:8083/connectors/inventory-connector",
+					"raw": "http://localhost:8083/connectors/postgres-connector",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -75,7 +75,7 @@
 					"port": "8083",
 					"path": [
 						"connectors",
-						"inventory-connector"
+						"postgres-connector"
 					]
 				}
 			},
@@ -88,7 +88,7 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://localhost:8083/connectors/inventory-connector",
+					"raw": "http://localhost:8083/connectors/postgres-connector",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -96,7 +96,7 @@
 					"port": "8083",
 					"path": [
 						"connectors",
-						"inventory-connector"
+						"postgres-connector"
 					]
 				}
 			},
@@ -118,7 +118,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"elastic-sink\",\r\n    \"config\": {\r\n        \"connector.class\": \"io.confluent.connect.elasticsearch.ElasticsearchSinkConnector\",\r\n        \"tasks.max\": \"1\",\r\n        \"topics\": \"dumb_table\",\r\n        \"connection.url\": \"http://elastic:9200\",\r\n        \"transforms\": \"unwrap,key\",\r\n        \"transforms.unwrap.type\": \"io.debezium.transforms.UnwrapFromEnvelope\",\r\n        \"transforms.key.type\": \"org.apache.kafka.connect.transforms.ExtractField$Key\",\r\n        \"transforms.key.field\": \"id\",\r\n        \"key.ignore\": \"false\",\r\n        \"type.name\": \"dumb_table\"\r\n    }\r\n}"
+					"raw": "{\r\n    \"name\": \"elastic-sink\",\r\n    \"config\": {\r\n        \"connector.class\": \"io.confluent.connect.elasticsearch.ElasticsearchSinkConnector\",\r\n        \"tasks.max\": \"1\",\r\n        \"topics\": \"test_table\",\r\n        \"connection.url\": \"http://elastic:9200\",\r\n        \"transforms\": \"unwrap,key\",\r\n        \"transforms.unwrap.type\": \"io.debezium.transforms.UnwrapFromEnvelope\",\r\n        \"transforms.key.type\": \"org.apache.kafka.connect.transforms.ExtractField$Key\",\r\n        \"transforms.key.field\": \"id\",\r\n        \"key.ignore\": \"false\",\r\n        \"type.name\": \"test_table\"\r\n    }\r\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8083/connectors/",
@@ -142,14 +142,14 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://localhost:9200/dumb_table/_search",
+					"raw": "http://localhost:9200/test_table/_search",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "9200",
 					"path": [
-						"dumb_table",
+						"test_table",
 						"_search"
 					]
 				}

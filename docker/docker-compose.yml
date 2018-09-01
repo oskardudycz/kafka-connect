@@ -1,6 +1,9 @@
     version: '3.3'
 
     services:
+      #######################################################
+      #  POSTGRES with Debezium and PLV8
+      #######################################################
       postgres: 
         build:   
             context: postgres
@@ -11,15 +14,18 @@
         networks:
           - connect_network
         environment:
-          POSTGRES_DB: inventory
-        #volumes:
-        #  - ./postgres/init.sql:/docker-entrypoint-initdb.d/1-schema.sql
+          POSTGRES_DB: test
+        volumes:
+          - ./postgres/init.sql:/docker-entrypoint-initdb.d/1-schema.sql
         healthcheck:
           test: "pg_isready -U postgres"
           interval: 10s
           timeout: 5s
           retries: 5
 
+      #######################################################
+      #  ElasticSearch
+      #######################################################
       elastic:
         image: docker.elastic.co/elasticsearch/elasticsearch:5.5.2
         container_name: elastic
@@ -32,6 +38,9 @@
         networks:
             - connect_network
 
+      #######################################################
+      #  Zookeeper
+      #######################################################
       zookeeper:
         image: debezium/zookeeper
         container_name: zookeeper
@@ -40,6 +49,9 @@
         networks:
             - connect_network
 
+      #######################################################
+      #  Kafka
+      #######################################################
       kafka:
         image: debezium/kafka
         container_name: kafka
@@ -54,6 +66,9 @@
           ADVERTISED_HOST_NAME: kafka
           KAFKA_ADVERTISED_HOSTNAME: 127.0.0.1
 
+      #######################################################
+      #  Kafka Connect
+      #######################################################
       connect:
         build:   
             context: connect
@@ -65,7 +80,8 @@
           - zookeeper
           - kafka
           - postgres
-        command: dockerize -wait tcp://kafka:9092 -wait tcp://postgres:5432 -timeout 2m -wait http://elastic:9200 -timeout 2m /docker-entrypoint.sh start
+        # Wait until Kafka, Postgres, ElasticSearch are ready
+        command: dockerize -wait tcp://kafka:9092 -timeout 2m -wait tcp://postgres:5432 -timeout 2m -wait http://elastic:9200 -timeout 2m /docker-entrypoint.sh start
         networks:
           - connect_network
         environment:
@@ -82,6 +98,9 @@
           timeout: 120s
           retries: 6
       
+      #######################################################
+      #  .NET Core WebApi with Marten
+      #######################################################
       webapp-with-marten:
         image: oskardudycz/eventsourcing.netcore
         container_name: webapp-with-marten
@@ -94,10 +113,14 @@
           retries: 6
         depends_on:
           - postgres
-        command: dockerize -wait -wait tcp://postgres:5432 -timeout 2m && /docker-entrypoint.sh start
+        # Wait until Postgres is ready
+        command: dockerize -wait tcp://postgres:5432 -timeout 2m /docker-entrypoint.sh start
         networks:
           - connect_network
 
+    #######################################################
+    #  Shared Network
+    #######################################################
     networks:
       connect_network:
         driver: bridge

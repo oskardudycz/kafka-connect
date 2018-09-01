@@ -27,7 +27,7 @@ public class Program
             consumer.OnConsumeError += (_, msg)
               => Console.WriteLine($"Consume error ({msg.TopicPartitionOffset}): {msg.Error}");
 
-            consumer.Subscribe("dumb_table");
+            consumer.Subscribe("test_table");
 
             while (true)
             {

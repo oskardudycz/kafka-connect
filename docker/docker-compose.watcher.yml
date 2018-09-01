@@ -6,7 +6,7 @@
         container_name: watcher
         environment:
           ZOOKEEPER_CONNECT: zookeeper:2181
-        command: ["watch-topic", "-a", "-k", "dumb_table"] 
+        command: ["watch-topic", "-a", "-k", "test_table"] 
     networks:
       default:
         external:
