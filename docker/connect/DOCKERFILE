@@ -1,10 +1,10 @@
 FROM debezium/connect:0.9
 
+# Download ElasticSearch Connector
 ENV KAFKA_CONNECT_ELASTICSEARCH_VERSION=4.1.2-lkd-r0
 ENV ELASTIC_PLUGIN=https://archive.landoop.com/lkd/packages/connectors/third-party/kafka-connect-elasticsearch/kafka-connect-elasticsearch-${KAFKA_CONNECT_ELASTICSEARCH_VERSION}.tar.gz
-#
-# Download connectors, verify the contents, and then install into the `$KAFKA_CONNECT_PLUGINS_DIR/debezium` directory...
-#
+
+# Install ElastiSearch connector by copying it to `KAFKA_CONNECT_PLUGINS_DIR`
 RUN echo $KAFKA_CONNECT_PLUGINS_DIR
 
 RUN curl -s ${ELASTIC_PLUGIN} -o plugin.tar.gz
@@ -13,17 +13,11 @@ RUN ls $KAFKA_CONNECT_PLUGINS_DIR
 RUN rm -f plugin.tar.gz;
 RUN ls
 
-# RUN curl -fSL -o /tmp/plugin.tar.gz \
-#                  $ELASTIC_PLUGIN &&\
-#     tar -xzf /tmp/plugin.tar.gz -C $KAFKA_CONNECT_PLUGINS_DIR &&\
-#     rm -f /tmp/plugin.tar.gz; 
+# Install Dockerize to be able to eg. wait for Postgres or ElasticSearch startup
+USER root
+RUN yum -y update && yum -y install wget
 
-# RUN eval $MD5SUMS &&\
-#     for CONNECTOR in {mysql,mongodb,postgres}; do \
-#     curl -fSL -o /tmp/plugin.tar.gz \
-#                  $MAVEN_REPO_CORE/io/debezium/debezium-connector-$CONNECTOR/$DEBEZIUM_VERSION/debezium-connector-$CONNECTOR-$DEBEZIUM_VERSION-plugin.tar.gz &&\
-#     declare MD5_PARAM_NAME="${CONNECTOR^^}_MD5" &&\
-#     echo "${!MD5_PARAM_NAME}  /tmp/plugin.tar.gz" | md5sum -c - &&\
-#     tar -xzf /tmp/plugin.tar.gz -C $KAFKA_CONNECT_PLUGINS_DIR &&\
-#     rm -f /tmp/plugin.tar.gz; \
-#     done;
+ENV DOCKERIZE_VERSION v0.6.1
+RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
+    && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
+    && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
