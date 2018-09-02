@@ -17,7 +17,7 @@ curl -X POST -H "Accept:application/json" -H "Content-Type:application/json" con
         "key.converter.schema.registry.url": "http://schema_registry:8081",
         "value.converter": "io.confluent.connect.avro.AvroConverter",
         "value.converter.schema.registry.url": "http://schema_registry:8081",
-        "table.whitelist": "public.test_table,mt_doc_account,mt_doc_allaccountsummaryview,mt_doc_accountsummaryview,EventSourcingSample.mt_doc_clientview",
+        "table.whitelist": "public.test_table,public.mt_doc_account,public.mt_doc_allaccountsummaryview,public.mt_doc_accountsummaryview,public.mt_doc_clientview",
         "transforms": "route",
         "transforms.route.type": "org.apache.kafka.connect.transforms.RegexRouter",
         "transforms.route.regex": "([^.]+)\\.([^.]+)\\.([^.]+)",
