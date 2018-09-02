@@ -66,6 +66,29 @@
           ADVERTISED_HOST_NAME: kafka
           KAFKA_ADVERTISED_HOSTNAME: 127.0.0.1
 
+      
+      #######################################################
+      #  Avro Schema Registry
+      #######################################################
+      schema_registry:
+        image: confluentinc/cp-schema-registry
+        container_name: schema_registry
+        hostname: schema_registry
+        ports:
+          - 8181:8181
+          - 8081:8081
+        depends_on:
+          - zookeeper
+        networks:
+          - connect_network
+        environment:
+          SCHEMA_REGISTRY_HOST_NAME: schema_registry
+          SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL: 'zookeeper:2181'
+          SCHEMA_REGISTRY_ACCESS_CONTROL_ALLOW_METHODS: 'GET,POST,PUT,OPTIONS'
+          SCHEMA_REGISTRY_ACCESS_CONTROL_ALLOW_ORIGIN: '*'
+          SCHEMA_LOG4J_ROOT_LOGLEVEL: 'ERROR'
+          SCHEMA_TOOLS_LOG4J_LOGLEVEL: 'ERROR'
+
       #######################################################
       #  Kafka Connect
       #######################################################
@@ -80,8 +103,9 @@
           - zookeeper
           - kafka
           - postgres
+          - schema_registry
         # Wait until Kafka, Postgres, ElasticSearch are ready
-        command: dockerize -wait tcp://kafka:9092 -timeout 2m -wait tcp://postgres:5432 -timeout 2m -wait http://elastic:9200 -timeout 2m /docker-entrypoint.sh start
+        command: dockerize -wait tcp://kafka:9092 -timeout 2m -wait tcp://postgres:5432 -timeout 2m -wait http://elastic:9200 -timeout 2m -wait http://schema_registry:8081 -timeout 2m /docker-entrypoint.sh start
         networks:
           - connect_network
         environment:
