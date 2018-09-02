@@ -67,6 +67,9 @@
           KAFKA_ADVERTISED_HOSTNAME: 127.0.0.1
 
       
+      #######################################################
+      #  Avro Schema Registry
+      #######################################################
       schema_registry:
         image: confluentinc/cp-schema-registry
         container_name: schema_registry
@@ -111,12 +114,6 @@
           CONFIG_STORAGE_TOPIC: my-connect-configs
           OFFSET_STORAGE_TOPIC: my-connect-offsets
           BOOTSTRAP_SERVERS: kafka:9092
-          KEY_CONVERTER: io.confluent.connect.avro.AvroConverter
-          VALUE_CONVERTER: io.confluent.connect.avro.AvroConverter
-          CONNECT_KEY_CONVERTER_SCHEMA_REGISTRY_URL: 'http://schema_registry:8081'
-          CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL: 'http://schema_registry:8081'
-          INTERNAL_KEY_CONVERTER: io.confluent.connect.avro.AvroConverter
-          INTERNAL_VALUE_CONVERTER: io.confluent.connect.avro.AvroConverter
         volumes:
             - "./connect/scripts:/scripts"
         healthcheck:

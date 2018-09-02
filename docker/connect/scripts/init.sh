@@ -17,8 +17,6 @@ curl -X POST -H "Accept:application/json" -H "Content-Type:application/json" con
         "key.converter.schema.registry.url": "http://schema_registry:8081",
         "value.converter": "io.confluent.connect.avro.AvroConverter",
         "value.converter.schema.registry.url": "http://schema_registry:8081",
-        "internal.key.converter": "org.apache.kafka.connect.json.JsonConverter"
-        "internal.value.converter": "org.apache.kafka.connect.json.JsonConverter"
         "table.whitelist": "public.test_table,mt_doc_account,mt_doc_allaccountsummaryview,mt_doc_accountsummaryview,EventSourcingSample.mt_doc_clientview",
         "transforms": "route",
         "transforms.route.type": "org.apache.kafka.connect.transforms.RegexRouter",
@@ -38,6 +36,16 @@ curl -X POST -H "Accept:application/json" -H "Content-Type:application/json" con
         "transforms.unwrap.type": "io.debezium.transforms.UnwrapFromEnvelope",
         "transforms.key.type": "org.apache.kafka.connect.transforms.ExtractField$Key",
         "transforms.key.field": "id",
+        "key.converter": "io.confluent.connect.avro.AvroConverter",
+        "key.converter.schema.registry.url": "http://schema_registry:8081",
+        "value.converter": "io.confluent.connect.avro.AvroConverter",
+        "value.converter.schema.registry.url": "http://schema_registry:8081",        
+        "value.converter.schemas.enable":"true",
+        "internal.key.converter": "io.confluent.connect.avro.AvroConverter",
+        "internal.key.converter.schema.registry.url": "http://schema_registry:8081",
+        "internal.value.converter": "io.confluent.connect.avro.AvroConverter",
+        "internal.value.converter.schema.registry.url": "http://schema_registry:8081",        
+        "internal.converter.schemas.enable":"true",
         "key.ignore": "false",
         "type.name": "test_table"
     }
@@ -53,8 +61,11 @@ curl -X POST -H "Accept:application/json" -H "Content-Type:application/json" con
         "transforms.unwrap.type": "io.debezium.transforms.UnwrapFromEnvelope",
         "transforms.key.type": "org.apache.kafka.connect.transforms.ExtractField$Key",
         "transforms.key.field": "id",
+        "key.converter": "io.confluent.connect.avro.AvroConverter",
+        "key.converter.schema.registry.url": "http://schema_registry:8081",
+        "value.converter": "io.confluent.connect.avro.AvroConverter",
+        "value.converter.schema.registry.url": "http://schema_registry:8081",
         "key.ignore": "false",
-        "type.name": "client",
-        "compact.map.entries": "false"
+        "type.name": "client"
     }
 }'
