@@ -5,9 +5,7 @@
       #  POSTGRES with Debezium and PLV8
       #######################################################
       postgres: 
-        build:   
-            context: postgres
-            dockerfile: DOCKERFILE
+        image: oskardudycz/postgres_debezium_plv8
         container_name: postgres
         hostname: postgres
         ports: ["5432:5432"]
@@ -128,6 +126,7 @@
       connectors-setup:
         image: jwilder/dockerize
         container_name: connectors-setup
+        hostname: connectors-setup
         volumes:
             - "./connect/scripts:/scripts"
         # setup script needs to run after Kafka Conect is working
