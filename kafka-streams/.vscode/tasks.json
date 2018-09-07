@@ -16,10 +16,10 @@
             "group": "build"
         },
         {
-            "label": "test",
+            "label": "debug",
             "type": "shell",
-            "command": "mvn -B test",
-            "group": "test"
+            "command": "mvnDebug exec:java -Dexec.mainClass=kafkastreamsapps.Pipe",
+            "group": "none"
         }
     ]
 }

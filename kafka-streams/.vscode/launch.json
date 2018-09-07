@@ -4,27 +4,12 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-        
-        {
-            "type": "java",
-            "name": "Debug (Launch)",
-            "request": "launch",
-            "cwd": "${workspaceFolder}",
-            "sourcePaths": [
-                ".",
-                "${fileDirname}"
-            ],
-            "console": "internalConsole",
-            "stopOnEntry": false,
-            "mainClass": "kafkastreamsapps.Pipe",
-            "args": ""
-        },
         {
             "type": "java",
             "name": "Debug (Attach)",
             "request": "attach",
             "hostName": "localhost",
-            "port": "8000"
+            "port": 8000
         }
     ]
 }
