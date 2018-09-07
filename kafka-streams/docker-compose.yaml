@@ -1,0 +1,14 @@
+version: "2.1"
+services:
+    kafka_streams: 
+        build:
+            dockerfile: Dockerfile
+            context: .
+        container_name: kafka_streams
+        ports:
+            - "8000:8000"
+        networks:
+            - streams_network
+networks:
+  streams_network:
+     driver: bridge
