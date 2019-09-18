@@ -118,7 +118,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"elastic-sink\",\r\n    \"config\": {\r\n        \"connector.class\": \"io.confluent.connect.elasticsearch.ElasticsearchSinkConnector\",\r\n        \"tasks.max\": \"1\",\r\n        \"topics\": \"test_table\",\r\n        \"connection.url\": \"http://elastic:9200\",\r\n        \"transforms\": \"unwrap,key\",\r\n        \"transforms.unwrap.type\": \"io.debezium.transforms.UnwrapFromEnvelope\",\r\n        \"transforms.key.type\": \"org.apache.kafka.connect.transforms.ExtractField$Key\",\r\n        \"transforms.key.field\": \"id\",\r\n        \"key.ignore\": \"false\",\r\n        \"type.name\": \"test_table\"\r\n    }\r\n}"
+					"raw": "{\r\n    \"name\": \"elastic-sink\",\r\n    \"config\": {\r\n        \"connector.class\": \"io.confluent.connect.elasticsearch.ElasticsearchSinkConnector\",\r\n        \"tasks.max\": \"1\",\r\n        \"topics\": \"test_table\",\r\n        \"connection.url\": \"http://elasticsearch:9200\",\r\n        \"transforms\": \"unwrap,key\",\r\n        \"transforms.unwrap.type\": \"io.debezium.transforms.UnwrapFromEnvelope\",\r\n        \"transforms.key.type\": \"org.apache.kafka.connect.transforms.ExtractField$Key\",\r\n        \"transforms.key.field\": \"id\",\r\n        \"key.ignore\": \"false\",\r\n        \"type.name\": \"test_table\"\r\n    }\r\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8083/connectors/",

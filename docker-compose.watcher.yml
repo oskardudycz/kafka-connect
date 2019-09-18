@@ -1,0 +1,13 @@
+    version: '3.3'
+
+    services:
+      watcher:
+        image: debezium/kafka
+        container_name: watcher
+        environment:
+          ZOOKEEPER_CONNECT: zookeeper:2181
+        command: ["watch-topic", "-a", "-k", "test_table"] 
+    networks:
+      default:
+        external:
+          name: docker_connect_network
