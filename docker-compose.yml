@@ -5,7 +5,10 @@
       #  POSTGRES with Debezium and PLV8
       #######################################################
       postgres: 
-        image: oskardudycz/postgres_debezium_plv8
+        image: debezium/postgres
+        environment:
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=Password12!
         container_name: postgres
         hostname: postgres
         ports: ["5432:5432"]
