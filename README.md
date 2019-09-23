@@ -15,7 +15,9 @@ How to run sample?
 1. Run following docker commands:
 
    1.1. `docker-compose build` - to build image of the .NET sample app,
+   
    1.2. `docker-compose up` - to start containers.
+   
 2. [Docker compose file](docker-compose.yml) has all needed setup to do the work:
 
    2.1. Postgres with Debezium preconfigured - see [config](https://github.com/oskardudycz/kafka-connect/blob/master/docker-compose.yml#L7)
