@@ -36,7 +36,7 @@ curl -X POST -H "Accept:application/json" -H "Content-Type:application/json" con
         "database.password": "Password12!",
         "database.dbname": "postgres",
         "database.server.name": "dbserver1",
-        "slot.name": "debezium3",
+        "slot.name": "debezium2",
         "table.whitelist" : "meetingsmanagementwrite.mt_events",
         "tombstones.on.delete" : "false",
         "transforms": "outbox",
