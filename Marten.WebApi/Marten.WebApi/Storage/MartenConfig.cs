@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -28,6 +28,7 @@ namespace Marten.WebApi.Storage
         {
             var config = configuration.GetSection(DefaultConfigKey).Get<MartenConfig>();
 
+            options.PLV8Enabled = false;
             options.Connection(config.ConnectionString);
             options.AutoCreateSchemaObjects = AutoCreate.All;
             options.Events.DatabaseSchemaName = config.WriteModelSchema;

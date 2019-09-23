@@ -203,7 +203,7 @@
         volumes:
             - "./connect/scripts:/scripts"
         # setup script needs to run after Kafka Conect is working
-        command: dockerize -wait http://connect:8083/connectors/ -timeout 2m sh /scripts/init.sh
+        command: dockerize -wait http://webapp-with-marten:5000/swagger -timeout 3m -wait http://connect:8083/connectors/ -timeout 3m sh /scripts/init.sh
         depends_on:
           - connect
         networks:

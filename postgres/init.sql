@@ -3,24 +3,6 @@ CREATE TABLE test_table(id SERIAL PRIMARY KEY, name VARCHAR);
 insert into test_table(name) values('oskar');
 insert into test_table(name) values('test');
 
-CREATE TABLE events
-(
-    id uuid NOT NULL,
-    aggregatetype character varying(255) COLLATE pg_catalog."default" NOT NULL,
-    aggregateid character varying(255) COLLATE pg_catalog."default" NOT NULL,
-    type character varying(255) COLLATE pg_catalog."default" NOT NULL,
-    payload jsonb NOT NULL,
-    CONSTRAINT events_pkey PRIMARY KEY (id)
-);
-
-INSERT INTO public.events(
-	id, aggregatetype, aggregateid, type, payload)
-	VALUES ('2d5b074d-b1c9-48da-a88a-e5f03597b134', 'User', '4a9e4159-0251-4307-84c8-4c6c9d10bd2e', 'UserCreated', '{"Name": "John Doe"}');
-    
-INSERT INTO public.events(
-	id, aggregatetype, aggregateid, type, payload)
-	VALUES ('e7e74c0c-1f2f-404a-824d-1b1d434810b7', 'User', '9a0af90b-288b-454d-94e4-a44574748db6', 'UserCreated', '{"Name": "Annie Hall"}');
-
 CREATE SCHEMA testevents;
 
 CREATE TABLE testevents.mt_events
