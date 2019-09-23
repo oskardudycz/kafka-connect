@@ -59,12 +59,12 @@ curl -X POST -H "Accept:application/json" -H "Content-Type:application/json" con
         "tombstones.on.delete" : "false",
         "transforms": "outbox",
         "transforms.outbox.type": "io.debezium.transforms.outbox.EventRouter",
+        "transforms.outbox.route.by.field": "tenant_id",
         "transforms.outbox.table.field.event.id": "id",
         "transforms.outbox.table.field.event.key": "stream_id",
         "transforms.outbox.table.field.event.type": "type",
-        "table.field.event.payload": "data",
+        "transforms.outbox.table.field.event.payload": "data",
         "transforms.outbox.table.field.event.payload.id": "stream_id",
-        "transforms.outbox.route.by.field": "tenant_id"
     }
 }' && curl -X POST -H "Accept:application/json" -H "Content-Type:application/json" connect:8083/connectors/ -d '
 {
