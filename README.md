@@ -13,9 +13,11 @@ The aim of this example is to show how to model following flow:
 
 How to run sample?
 1. Run following docker commands:
+
    1.1. `docker-compose build` - to build image of the .NET sample app,
    1.2. `docker-compose up` - to start containers.
 2. [Docker compose file](docker-compose.yml) has all needed setup to do the work:
+
    2.1. Postgres with Debezium preconfigured - see [config](https://github.com/oskardudycz/kafka-connect/blob/master/docker-compose.yml#L7)
    2.1. Kafka-Conect - see [config](https://github.com/oskardudycz/kafka-connect/blob/master/docker-compose.yml#L164)
    2.2. ElasticSearch - see [config](https://github.com/oskardudycz/kafka-connect/blob/master/docker-compose.yml#L42)
@@ -25,10 +27,12 @@ How to run sample?
    2.6. Kafka Rest - see [config](https://github.com/oskardudycz/kafka-connect/blob/master/docker-compose.yml#L123)
    2.7. Sample .NET WebApi app with Marten - [config](https://github.com/oskardudycz/kafka-connect/blob/master/docker-compose.yml#L213).
 3. Besides the tools by themselves you can also use UIs:
+
    3.1. PGAdmin - http://localhost:5050 - see [config](https://github.com/oskardudycz/kafka-connect/blob/master/docker-compose.yml#L28)
    3.2. Kafka Topics UI - http://localhost:8000 - see [config](https://github.com/oskardudycz/kafka-connect/blob/master/docker-compose.yml#L143)
    3.3. Kibana - UI for ElasticSearch - http://localhost:5601 - see [config](https://github.com/oskardudycz/kafka-connect/blob/master/docker-compose.yml#L59)
    3.4. Swagger for Marten WebApi - http://localhost:5000/swagger/index.html 
+   
 4. Started dockers already have test tables preconfigured - see [SQL script](https://github.com/oskardudycz/kafka-connect/blob/master/postgres/init.sql).
 5. Connectors are configured via CURL - see [Script](https://github.com/oskardudycz/kafka-connect/blob/master/connect/scripts/init.sh) and run via [docker compose](https://github.com/oskardudycz/kafka-connect/blob/master/docker-compose.yml#L206).
 
