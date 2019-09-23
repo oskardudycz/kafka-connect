@@ -21,10 +21,6 @@ INSERT INTO public.events(
 	id, aggregatetype, aggregateid, type, payload)
 	VALUES ('e7e74c0c-1f2f-404a-824d-1b1d434810b7', 'User', '9a0af90b-288b-454d-94e4-a44574748db6', 'UserCreated', '{"Name": "Annie Hall"}');
 
--- Table: meetingsmanagementwrite.mt_events
-
--- DROP TABLE meetingsmanagementwrite.mt_events;
-
 CREATE SCHEMA meetingsmanagementwrite;
 
 CREATE TABLE meetingsmanagementwrite.mt_events
