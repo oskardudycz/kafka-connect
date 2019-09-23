@@ -49,4 +49,6 @@ How to run sample?
 5. Connectors are configured via CURL - see [Script](https://github.com/oskardudycz/kafka-connect/blob/master/connect/scripts/init.sh) and run via [docker compose](https://github.com/oskardudycz/kafka-connect/blob/master/docker-compose.yml#L206).
 
 
+
+
 **Kafka Connect with Marten** is Copyright &copy; 2018-2019 [Oskar Dudycz](http://oskar-dudycz.pl) and other contributors under the [MIT license](LICENSE).
