@@ -6,8 +6,11 @@ See more about Marten in documentation: [link](jasperfx.github.io/marten/documen
 The aim of this example is to show how to model following flow:
    1. Marten is .NET framework that allows to store data in Posgres as Documents and Events. Document and Event Data is stored with document tables.
    2. Data from the Marten tables will be moved through Debezium framework with Postgres CDC mechanism (sink connector).
+   
       2.1 Events table (`mt_events`) with Outbox pattern. See more [here](https://debezium.io/blog/2019/02/19/reliable-microservices-data-exchange-with-the-outbox-pattern/) and [there](https://debezium.io/documentation/reference/0.9/configuration/outbox-event-router.html).
+      
       2.2 Document tables with "regular" approach.
+      
    3. Debezium moves data to Kafka Connect and then to Kafka.
    4. Documents (`mt_doc_meetings`) are moved then to ElasticSearch through Kafka Connect sink connector.
 
