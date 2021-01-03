@@ -54,4 +54,4 @@ How to run sample?
 
 
 
-**Kafka Connect with Marten** is Copyright &copy; 2018-2020 [Oskar Dudycz](http://oskar-dudycz.pl) and other contributors under the [MIT license](LICENSE).
+**Kafka Connect with Marten** is Copyright &copy; 2018-2021 [Oskar Dudycz](http://event-driven.io) and other contributors under the [MIT license](LICENSE).
