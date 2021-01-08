@@ -51,7 +51,8 @@ How to run sample?
 4. Started dockers already have test tables preconfigured - see [SQL script](https://github.com/oskardudycz/kafka-connect/blob/main/postgres/init.sql).
 5. Connectors are configured via CURL - see [Script](https://github.com/oskardudycz/kafka-connect/blob/main/connect/scripts/init.sh) and run via [docker compose](https://github.com/oskardudycz/kafka-connect/blob/main/docker-compose.yml#L206).
 
-
+## Links
+- https://medium.com/trendyol-tech/debezium-with-simple-message-transformation-smt-4f5a80c85358
 
 
 **Kafka Connect with Marten** is Copyright &copy; 2018-2021 [Oskar Dudycz](http://event-driven.io) and other contributors under the [MIT license](LICENSE).
